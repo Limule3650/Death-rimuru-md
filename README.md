@@ -5,8 +5,11 @@ Limule-md - un simple whatsapp bot pour vous.
 <p align="center">
   <a href="https://youtube.com/@JOURNALDESTEMPEST?si=J88r-_6TcZvQIifZ">
     <img alt="Limule-MD-V2" height="400" src="https://telegra.ph/file/090e6aac73fb24a0dd70e.jpg">
+    
   </a>
 </p>
+FORK THE REPOSITORY [Here](https://github.com/Limule3650/Death-rimuru-md/fork)
+
 
 ### SETUP
 
@@ -31,8 +34,55 @@ Limule-md - un simple whatsapp bot pour vous.
     <br>
 <a href='https://signup.heroku.com/identity' target="_blank"><img alt='heroku' src='https://img.shields.io/badge/-Create-violet?style=for-the-badge&logo=keroku&logoColor=violet'/></a>
 
-2. HEROKU deployment place still on process. thanks 
+2. HEROKU deployment place still on process. thanks
 
+
+## `For Termux/Ssh/Ubuntu`
+
+```bash
+
+apt update
+
+apt upgrade
+
+pkg update && pkg upgrade
+
+pkg install bash
+
+pkg install libwebp
+
+pkg install git -y
+
+pkg install nodejs -y 
+
+pkg install ffmpeg -y 
+
+pkg install wget
+
+pkg install yarn
+
+pkg install imagemagick -y
+
+git clone https://github.com/Limule3650/Death-rimuru-md
+
+cd Death-rimuru-md
+
+rm -rf session
+
+yarn install
+
+npm start
+
+```
+
+## `For 24/7 Activation (Termux)`
+
+```bash
+
+npm i -g pm2 && pm2 start  index.js && pm2 save && pm2 logs
+
+
+```
 
 
 For help visit [Github wiki](https://github.com/Limule3650/Limule-MD-V2/wiki)
