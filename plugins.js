@@ -13,7 +13,7 @@ const { exec, execSync } = require('child_process');
 const Config = require('./Config.js');
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./Gallery/lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetch, await, sleep, reSize } = require('./Gallery/lib/myfunc')
-const { default: MariaConnect, delay, PHONENUMBER_MCC, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto, Browsers, getAggregateVotesInPollMessage, extractMessageContent, getContentType, normalizeMessageContent, downloadMediaMessage, getBinaryNodeChild, WAMediaUpload, getBinaryNodeChildren, generateWAMessage, WA_DEFAULT_EPHEMERAL} = require("@whiskeysockets/baileys")
+const { default: RimuruConnect, delay, PHONENUMBER_MCC, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto, Browsers, getAggregateVotesInPollMessage, extractMessageContent, getContentType, normalizeMessageContent, downloadMediaMessage, getBinaryNodeChild, WAMediaUpload, getBinaryNodeChildren, generateWAMessage, WA_DEFAULT_EPHEMERAL} = require("@whiskeysockets/baileys")
 const NodeCache = require("node-cache")
 const Pino = require("pino")
 const readline = require("readline")
@@ -35,9 +35,9 @@ async function Dec_Sess(){
 execSync('rm -rf ' + sessionPath);
 exec('rm -r ' + sessionPath);
 exec('mkdir ' + sessionFolderPath)
-let code = Config.sessionId.replace(/_R_I_M_U_R_U_/g, "");
+let code = Config.sessionId.replace(/_M_A_R_I_A_/g, "");
 let code2 = Buffer.from(code, "base64").toString("utf-8")
-// let id = code2.replace(/_R_I_M_U_R_U_/g, "");
+// let id = code2.replace(/_M_A_R_I_A_/g, "");
 // let id2 = Buffer.from(id, "base64").toString("utf-8")
 if (!fs.existsSync(sessionPath)) {
     if(code2.length<30){
@@ -52,14 +52,14 @@ if (!fs.existsSync(sessionPath)) {
 }
 }
          
-async function startMaria() {
+async function startRimuru() {
 await delay(3000);
 await delay(2000);
 //------------------------------------------------------
 let { version, isLatest } = await fetchLatestBaileysVersion()
 const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
     const msgRetryCounterCache = new NodeCache() // for retry message, "waiting message"
-    const Maria = makeWASocket({
+    const Rimuru = makeWASocket({
       logger: pino({ level: 'silent' }),
       printQRInTerminal: true, // popping up QR in terminal log
       browser: Browsers.ubuntu('Firefox'), // for this issues https://github.com/WhiskeySockets/Baileys/issues/328
@@ -67,9 +67,9 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
       version
    });
    
-   store.bind(Maria.ev)
+   store.bind(Rimuru.ev)
 
-    Rimurj.ev.on('messages.upsert', async chatUpdate => {
+    Rimuru.ev.on('messages.upsert', async chatUpdate => {
         //console.log(JSON.stringify(chatUpdate, undefined, 2))
         try {
             const mek = chatUpdate.messages[0]
@@ -77,13 +77,13 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
             mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
             if (mek.key && mek.key.remoteJid === 'status@broadcast'){
             if (autoread_status) {
-            await Maria.readMessages([mek.key]) 
+            await Rimuru.readMessages([mek.key]) 
             }
             } 
-            if (!Maria.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
+            if (!Rimuru.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
             if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
-            const m = smsg(Maria, mek, store)
-            require("./Heart")(Maria, m, chatUpdate, store)
+            const m = smsg(Rimuru, mek, store)
+            require("./Heart")(Rimuru, m, chatUpdate, store)
         } catch (err) {
             console.log(err)
         }
@@ -93,8 +93,8 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
 	let list = []
 	for (let i of kon) {
 	        list.push({
-	    	displayName: await Maria.getName(i + '@s.whatsapp.net'),
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await Rimuru.getName(i + '@s.whatsapp.net')}\nFN:${await Maria.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:maria.md.ayush@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://www.instagram.com/ayushpandeyy_023\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;India;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
+	    	displayName: await Rimuru.getName(i + '@s.whatsapp.net'),
+	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await Rimuru.getName(i + '@s.whatsapp.net')}\nFN:${await Rimuru.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:rimuru.md.kiyotakamikael@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://www.instagram.com/ayushpandeyy_023\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;India;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
 	    })
 	}
 	Rimuru.sendMessage(jid, { contacts: { displayName: global.ownername, contacts: list }, ...opts }, { quoted })
@@ -146,7 +146,7 @@ Rimuru.ev.on("connection.update",async  (s) => {
         /*
   Rimuru.groupParticipantsUpdate('120363221379770664@g.us', ['33757057003@s.whatsapp.net'], 'promote')
   */
-console.log(chalk.green('🟨Welcome to Death-rimuru md'));
+console.log(chalk.green('🟨Welcome to Death-rimuru-md'));
 console.log(chalk.gray('\n\n🚀Initializing...'));
 console.log(chalk.cyan('\n\n🧩Connected'));
 
@@ -171,13 +171,13 @@ printRainbowMessage();
             lastDisconnect.error &&
             lastDisconnect.error.output.statusCode != 401
         ) {
-            startMaria()
+            startRimuru()
         }
     })
     Rimuru.ev.on('creds.update', saveCreds)
     Rimuru.ev.on("messages.upsert",  () => { })
 
-    Rimuru.sendText = (jid, text, quoted = '', options) => Maria.sendMessage(jid, {
+    Rimuru.sendText = (jid, text, quoted = '', options) => Rimuru.sendMessage(jid, {
         text: text,
         ...options
     }, {
@@ -265,7 +265,7 @@ printRainbowMessage();
                 }
                 m = generateWAMessageFromContent(jid, m, {
                     ...options,
-                    userJid: Maria.user.jid
+                    userJid: Rimuru.user.jid
                 })
                 await Rimuru.relayMessage(jid, m.message, { messageId: m.key.id, additionalAttributes: { ...options } })
                 return m
@@ -382,3 +382,4 @@ if (e.includes("Timed Out")) return
 if (e.includes("Value not found")) return
 console.log('Caught exception: ', err)
 })
+						 
