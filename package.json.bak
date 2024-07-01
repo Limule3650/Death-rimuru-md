@@ -1,5 +1,5 @@
 {
-    "name": "Maria-Bot",
+    "name": "Death-rimuru bot",
     "version": "3.0",
     "description": "WhatsApp Bot Using Nodejs",
     "main": "index.js",
@@ -13,7 +13,7 @@
     "scripts": {
         "start": "node index.js"
     },
-    "author": "Ayush",
+    "author": "Cosmic Limule",
     "license": "MIT",
     "dependencies": {
         "@adiwajshing/keyed-db": "^0.2.4",
