@@ -3,7 +3,7 @@ const chalk = require('chalk');
 require('dotenv').config();
 
 //contact details
-global.ownernumber = [ process.env.OWNER_NUMBER || "919931122319"],
+global.ownernumber = [ process.env.OWNER_NUMBER || "237693538738"],
 global.ownername = process.env.OWNER_NAME || "𓆩‎𝕮𝖔𝖘𝖒𝖎𝖈 𝕷𝖎𝖒𝖚𝖑𝖊✘𓆪",
 global.ytname = "YT: LimuleBot.inc"
 global.socialm = "GitHub: Limule3650"
@@ -69,3 +69,4 @@ fs.watchFile(file, () => {
     delete require.cache[file]
     require(file)
 })
+    
